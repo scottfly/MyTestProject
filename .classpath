@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="lib" path="D:/Java_jar/JAVA_JAR/log4j-1.2.16.jar"/>
+	<classpathentry kind="lib" path="D:/Java_jar/JAVA_JAR/slf4j-log4j12-1.5.10.jar"/>
+	<classpathentry kind="lib" path="D:/Java_jar/antlr4-runtime-4.5.1.jar"/>
+	<classpathentry kind="lib" path="D:/Java_jar/genson-1.4.jar"/>
+	<classpathentry kind="lib" path="D:/Java_jar/graphql-java-2.0.0.jar" sourcepath="D:/maven/com/graphql-java/graphql-java/2.0.0/graphql-java-2.0.0-sources.jar"/>
+	<classpathentry kind="lib" path="D:/Java_jar/junit-3.8.1.jar"/>
+	<classpathentry kind="lib" path="D:/Java_jar/slf4j-api-1.7.12.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
