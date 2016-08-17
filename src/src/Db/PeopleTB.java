@@ -2,7 +2,7 @@ package src.Db;
 
 public class PeopleTB 
 {
-	private int id;
+	private int id; 				//¹ØÁªcb_degrees±í
 	private String object_id;
 	private String first_name;
 	private String last_name;

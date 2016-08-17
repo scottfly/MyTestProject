@@ -1,21 +1,26 @@
 package src.Db;
+import java.sql.Date;
 
 public class ObjectTB {
 	
-	private String id;
-	private String entity_type;
+	private String id;					//与其他的表关联 对应object_id   
+	private String entity_type;			//分3种type  company person products 
+	private Long entity_id;
+	private String parent_id;			//parent_id 关联company？
+	private String normalized_name;
+	private String permalink;
 	private String name;
-	private String founded_at;
+	private Date founded_at;
 	private String domain;
 	private String homepage_url;	
 	private String logo_url;
 	private String overview;
 	private String city;
-	private int funding_rounds;
-	private int relationships;
+	private int funding_rounds;			//关联 cb_funding_rounds表   以及 cd_funds表
+	private int relationships;			//关联cb_relationships表
 	private int investment_rounds;
 	private int invested_companies;
-	private int milestones;
+	private int milestones;				//数量说明与cb_milestones表关联
 	
 	
 	public String getId() {
@@ -36,10 +41,10 @@ public class ObjectTB {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getFounded_at() {
+	public Date getFounded_at() {
 		return founded_at;
 	}
-	public void setFounded_at(String founded_at) {
+	public void setFounded_at(Date founded_at) {
 		this.founded_at = founded_at;
 	}
 	public String getDomain() {
@@ -101,6 +106,12 @@ public class ObjectTB {
 	}
 	public void setMilestones(int milestones) {
 		this.milestones = milestones;
+	}
+	public String getParent_id() {
+		return parent_id;
+	}
+	public void setParent_id(String parent_id) {
+		this.parent_id = parent_id;
 	}
 	
 	
