@@ -494,6 +494,8 @@ public class ProjectSchema {
 				.name("company_info")
 				.type(new GraphQLList(company))
 				.argument(newArgument().name("id").type(GraphQLString).build())
+				.argument(newArgument().name("name").type(GraphQLString).build())
+				.argument(newArgument().name("normalized_name").type(GraphQLString).build())
 				.dataFetcher(companysFetcher)
 				.build();
 		
