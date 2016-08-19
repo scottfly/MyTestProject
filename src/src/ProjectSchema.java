@@ -185,6 +185,8 @@ public class ProjectSchema {
 			 .field(newFieldDefinition().name("name").type(new GraphQLNonNull(GraphQLString)).build())
 			 .field(newFieldDefinition().name("normalized_name").type(new GraphQLNonNull(GraphQLString)).build())
 			 .field(newFieldDefinition().name("parent_id").type(GraphQLString).build())
+			 .field(newFieldDefinition().name("refer_companys").type(new GraphQLList(new GraphQLTypeReference("ObjectEntity"))).build())
+			 .field(newFieldDefinition().name("refer_persons").type(new GraphQLList(new GraphQLTypeReference("ObjectEntity"))).build())
 			 .typeResolver(new TypeResolver(){
 				 
 				@Override
@@ -216,6 +218,7 @@ public class ProjectSchema {
 			.field(newFieldDefinition().name("id").type(new GraphQLNonNull(GraphQLString)).build())
 			.field(newFieldDefinition().name("name").type(new GraphQLList(GraphQLString)).build())
 			.field(newFieldDefinition().name("parent_id").type(GraphQLString).build())
+			.field(newFieldDefinition().name("refer_companys").type(new GraphQLList(objectEntity)).build())
 			.withInterface(objectEntity)
 			.build();
 			
@@ -232,6 +235,10 @@ public class ProjectSchema {
 			.field(newFieldDefinition().name("last_name").type(GraphQLString).build())
 			.field(newFieldDefinition().name("birthplace").type(GraphQLString).build())
 			.field(newFieldDefinition().name("affiliation_name").type(GraphQLString).build())
+			.field(newFieldDefinition().name("refer_persons").type(new GraphQLList(objectEntity)).build())
+			.field(newFieldDefinition().name("refer_company").type(new GraphQLList(objectEntity)).build())
+			.field(newFieldDefinition().name("degree_info").type(degree).build())
+			
 			.build();
 	//cb_objects(company interface objectEntity)
 	public static GraphQLObjectType  company = newObject()
@@ -248,6 +255,10 @@ public class ProjectSchema {
 			.field(newFieldDefinition().name("allProducts").type(new GraphQLList(ProductsType)).build())
 			.field(newFieldDefinition().name("fundingRounds").type(GraphQLInt).build())
 			.field(newFieldDefinition().name("fundingRounds_info").type(new GraphQLList(funding_Rounds)).build())
+			.field(newFieldDefinition().name("refer_companys").type(new GraphQLList(objectEntity)).build())
+			.field(newFieldDefinition().name("refer_person").type(new GraphQLList(objectEntity)).build())
+			.field(newFieldDefinition().name("relationship").type(new GraphQLList(person)).build())
+			.field(newFieldDefinition().name("officeinfo").type(new GraphQLList(offices)).build())
 			 /**
 			  *。。。other base type 
 			  */
@@ -262,26 +273,12 @@ public class ProjectSchema {
 			.field(newFieldDefinition().name("name").type(new GraphQLNonNull(GraphQLString)).build())
 			.field(newFieldDefinition().name("normalized_name").type(new GraphQLNonNull(GraphQLString)).build())
 			.field(newFieldDefinition().name("funds_info").type(new GraphQLList(funds)).build())
+			.field(newFieldDefinition().name("refer_companys").type(new GraphQLList(objectEntity)).build())
+			.field(newFieldDefinition().name("refer_persons").type(new GraphQLList(objectEntity)).build())
 			 /**
 			  *。。。other base type 
 			  */
 			.build();
-	
-	
-	//base query Fragment 
-	//company?
-	//degree?
-	//person?
-	//funding_rounds?
-	//investors?
-	//...and so on
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	//查询一个或多个person
@@ -310,9 +307,149 @@ public class ProjectSchema {
 					 * */
 					return respeopleInfo;
 				}
+			};			
+			
+	private DataFetcher degreeFetcher = new DataFetcher()
+			{
+
+				@Override
+				public Object get(DataFetchingEnvironment environment) {
+					// TODO Auto-generated method stub
+					String person_id = environment.getArgument("");
+					
+					List<Degrees> degreeInfo = new ArrayList<Degrees>();
+					/**/
+					return degreeInfo;
+				}
+		
+			};
+	private DataFetcher companysFetcher = new DataFetcher()	
+			{
+
+				@Override
+				public Object get(DataFetchingEnvironment environment) {
+					// TODO Auto-generated method stub
+					String companys_id = environment.getArgument("");
+					
+					List<ObjectTB> degreeInfo = new ArrayList<ObjectTB>();
+					return degreeInfo;
+				}
+		
+			};
+	private DataFetcher f_roundsFetcher = new DataFetcher()	
+			{
+
+				@Override
+				public Object get(DataFetchingEnvironment environment) {
+					// TODO Auto-generated method stub
+					String f_roundstype = environment.getArgument("");
+					
+					List<Funding_Rounds> roundsInfo = new ArrayList<Funding_Rounds>();
+					return roundsInfo;
+				}
+		
+			}; 
+			
+	private DataFetcher relationFetcher = new DataFetcher()	
+			{
+
+				@Override
+				public Object get(DataFetchingEnvironment environment) {
+					// TODO Auto-generated method stub
+					String company_id = environment.getArgument("");
+					String person_id = environment.getArgument("");
+					
+					List<Relationships> relationInfo = new ArrayList<Relationships>();
+					return relationInfo;
+				}
+		
+			}; 
+	
+	private DataFetcher investmentFetcher = new DataFetcher()	
+			{
+
+				@Override
+				public Object get(DataFetchingEnvironment environment) {
+					// TODO Auto-generated method stub
+					String company_id = environment.getArgument("");
+					String person_id = environment.getArgument("");
+					int funding_roundid = environment.getArgument("");
+							
+					List<Relationships> investmentInfo = new ArrayList<Relationships>();
+					
+					return investmentInfo;
+				}
+		
+			}; 
+			
+	private DataFetcher officeFetcher = new DataFetcher()	
+			{
+				@Override
+				public Object get(DataFetchingEnvironment environment) {
+					// TODO Auto-generated method stub
+					String company_id = environment.getArgument("");
+						
+					List<Offices> officeInfo = new ArrayList<Offices>();
+					
+					return officeInfo;
+				}
+			};
+	
+	private DataFetcher milestoneFetcher = new DataFetcher()	
+			{
+				@Override
+				public Object get(DataFetchingEnvironment environment) {
+					// TODO Auto-generated method stub
+					String company_id = environment.getArgument("");
+						
+					List<Milestones> milestoneInfo = new ArrayList<Milestones>();
+					
+					return milestoneInfo;
+				}
 			};
 			
-			//api?
+	private DataFetcher iposFetcher = new DataFetcher()	
+			{
+				@Override
+				public Object get(DataFetchingEnvironment environment) {
+					// TODO Auto-generated method stub
+					String company_id = environment.getArgument("");
+					Long ips_id = environment.getArgument("");
+						
+					List<Ipos> iposInfo = new ArrayList<Ipos>();
+					
+					return iposInfo;
+				}
+			};
+	private DataFetcher fundsFetcher = new DataFetcher()	
+			{
+				@Override
+				public Object get(DataFetchingEnvironment environment) {
+					// TODO Auto-generated method stub
+					String company_id = environment.getArgument("");
+					Long fund_id = environment.getArgument("");
+						
+					List<Funds> fundsInfo = new ArrayList<Funds>();
+					
+					return fundsInfo;
+				}
+			};
+	private DataFetcher acqFetcher = new DataFetcher()	
+			{
+				@Override
+				public Object get(DataFetchingEnvironment environment) {
+					// TODO Auto-generated method stub
+					String acquisition_object_id = environment.getArgument("");
+					String acquired_object_id = environment.getArgument("");
+					Long acquisition_id = environment.getArgument("");
+						
+					List<Acquisitions> acqInfo = new ArrayList<Acquisitions>();
+					
+					return acqInfo;
+				}
+			};
+			
+	//api?
 	public GraphQLFieldDefinition QueryPeopleInfo()
 	{
 		return GraphQLFieldDefinition.newFieldDefinition()
@@ -324,17 +461,118 @@ public class ProjectSchema {
 				.build();
 	}
 	
+	//funding_roundtype "seriesB"  to   [company of team {persons {degree}}  ]
+	/*query testqurey {
+	 * team_info($roundtype:GraphQLString ){								//cb_funding_rounds return company_object_id
+	 *    company_objectid   <list>
+	 *    companys($company_object_id: GraphQLList(roundtype:GraphQLString)){	//cb_investments return person_object_id
+	 *    	company_name
+	 *   	person_object_id
+	 *    	degree($person_object_id:GraphQLString ){									//cb_degree 
+	 *    		degree_type
+	 *    		institution 				
+	 *    		}
+	 *    	}
+	 *    }
+	 *  }
+	 * */
+
+	//
+	public GraphQLFieldDefinition Queryquestion_1()
+	{
+		return GraphQLFieldDefinition.newFieldDefinition()
+				.name("team_info")
+				.type(funding_Rounds)
+				.argument(newArgument().name("funding_roundtype").type(GraphQLString).build())
+				.dataFetcher(f_roundsFetcher)
+				.build();
+	}
 	
-			
-			
-			
-			
-			
-			
-			
+	public GraphQLFieldDefinition Queryquestion_2()
+	{
+		return GraphQLFieldDefinition.newFieldDefinition()
+				.name("company_info")
+				.type(new GraphQLList(company))
+				.argument(newArgument().name("id").type(GraphQLString).build())
+				.dataFetcher(companysFetcher)
+				.build();
+		
+	}
+	public GraphQLFieldDefinition Queryquestion_3()
+	{
+		return GraphQLFieldDefinition.newFieldDefinition()
+				.name("relationship_info")
+				.type(rshipTargetType)
+				.argument(newArgument().name("r_object_id").type(GraphQLString).build())
+				.argument(newArgument().name("r_person_id").type(GraphQLString).build())
+				.dataFetcher(relationFetcher)
+				.build();
+	}
 	
+	public GraphQLFieldDefinition Queryquestion_4()
+	{
+		return GraphQLFieldDefinition.newFieldDefinition()
+				.name("degree_info")
+				.type(degree)
+				.argument(newArgument().name("person_object_id").type(GraphQLString).build())
+				.argument(newArgument().name("institution").type(GraphQLString).build())
+				.dataFetcher(degreeFetcher)
+				.build();		
+	}
 	
+	public GraphQLFieldDefinition Queryquestion_5()
+	{
+		return GraphQLFieldDefinition.newFieldDefinition()
+				.name("investments")
+				.type(investments)
+				.argument(newArgument().name("funded_object_id").type(GraphQLString).build())
+				.argument(newArgument().name("investor_object_id").type(GraphQLString).build())
+				.dataFetcher(investmentFetcher)
+				.build();
+	}
 	
+	public GraphQLFieldDefinition Queryquestion_6()
+	{
+		return GraphQLFieldDefinition.newFieldDefinition()
+				.name("fundsinfo")
+				.type(funds)
+				.argument(newArgument().name("object_id").type(GraphQLString).build())
+				.argument(newArgument().name("funded_id").type(GraphQLBigInteger).build())
+				.dataFetcher(fundsFetcher)
+				.build();
+	}
+	
+	public GraphQLFieldDefinition Queryquestion_7()
+	{
+		return GraphQLFieldDefinition.newFieldDefinition()
+				.name("milestones_info")
+				.type(milesStonesType)
+				.argument(newArgument().name("object_id").type(GraphQLString).build())
+				.dataFetcher(milestoneFetcher)
+				.build();
+	}
+	
+	public GraphQLFieldDefinition Queryquestion_8()
+	{
+		return GraphQLFieldDefinition.newFieldDefinition()
+				.name("ipos_info")
+				.type(ipos)
+				.argument(newArgument().name("object_id").type(GraphQLString).build())
+				.argument(newArgument().name("ipo_id").type(GraphQLBigInteger).build())
+				.dataFetcher(iposFetcher)
+				.build();
+	}
+	
+	public GraphQLFieldDefinition Queryquestion_9()
+	{
+		return GraphQLFieldDefinition.newFieldDefinition()
+				.name("office_info")
+				.type(offices)
+				.argument(newArgument().name("object_id").type(GraphQLString).build())
+				.argument(newArgument().name("office_id").type(GraphQLBigInteger).build())
+				.dataFetcher(iposFetcher)
+				.build();
+	}
 	
 	//
 	private  GraphQLSchema schema;
@@ -345,6 +583,14 @@ public class ProjectSchema {
 		schema = GraphQLSchema.newSchema()
 				.query(newObject().name("schemaQuery")
 						.field(QueryPeopleInfo())
+						.field(Queryquestion_1())
+						.field(Queryquestion_2())
+						.field(Queryquestion_3())
+						.field(Queryquestion_4())
+						.field(Queryquestion_5())
+						.field(Queryquestion_6())
+						.field(Queryquestion_7())
+						.field(Queryquestion_8())
 						.build())
 				.build();
 	}
