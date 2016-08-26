@@ -13,6 +13,9 @@ import static graphql.schema.GraphQLInterfaceType.newInterface;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jooq.Record;
+import org.jooq.Result;
+
 import java.util.Collections;
 import java.util.Collections;
 import java.math.BigInteger;
@@ -20,7 +23,8 @@ import java.math.BigInteger;
 import src.IdInterface.*;
 import src.Db.*;
 import graphql.schema.*;
-
+import src.DataF_cb_objects;
+import src.DataF_cb_people;
 
 public class ProjectSchema {
 	
@@ -288,14 +292,28 @@ public class ProjectSchema {
 				@Override
 				public Object get(DataFetchingEnvironment environment) {
 					// TODO Auto-generated method stub
-					int id = environment.getArgument("id");
+					String id = environment.getArgument("object_id");
 					String name = environment.getArgument("name");
-					if(name.isEmpty() && id == 0)
+					if(name.isEmpty() && id.isEmpty())
 					{
 						return null;
 					}
 					List<PeopleTB> respeopleInfo = new ArrayList<PeopleTB>();
-				
+					
+					DataF_cb_people people = new DataF_cb_people();
+					Result<Record>  res_peoples = people.select(id);
+					
+					for(Object aResult : res_peoples){
+						Record record = (Record) aResult;
+						PeopleTB peo = new PeopleTB();
+						
+						peo.setFirst_name((String)record.getValue("first_name"));
+						peo.setLast_name((String)record.getValue("last_name"));
+						peo.setAffiliation_name((String)record.getValue("affiliation_name"));
+										
+						respeopleInfo.add(peo);
+					}
+
 					/*PeopleTB peo = new PeopleTB();
 					 * peo.setId(2);
 					 * peo.setObject_id("p:3");
@@ -455,7 +473,7 @@ public class ProjectSchema {
 		return GraphQLFieldDefinition.newFieldDefinition()
 				.name("people_info")
 				.type(new GraphQLList(person))
-				.argument(newArgument().name("id").type(GraphQLInt).build())
+				.argument(newArgument().name("object_id").type(GraphQLString).build())
 				.argument(newArgument().name("name").type(GraphQLString).build())
 				.dataFetcher(peopleInfoFetcher)
 				.build();
