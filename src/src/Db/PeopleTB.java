@@ -6,7 +6,7 @@ public class PeopleTB
 	private String object_id;
 	private String first_name;
 	private String last_name;
-	private String bithplace;
+	private String birthplace;
 	private String affiliation_name;
 
 	
@@ -35,11 +35,11 @@ public class PeopleTB
 	public void setLast_name(String last_name) {
 		this.last_name = last_name;
 	}
-	public String getBithplace() {
-		return bithplace;
+	public String getBirthplace() {
+		return birthplace;
 	}
-	public void setBithplace(String bithplace) {
-		this.bithplace = bithplace;
+	public void setBirthplace(String birthplace) {
+		this.birthplace = birthplace;
 	}
 	public String getAffiliation_name() {
 		return affiliation_name;

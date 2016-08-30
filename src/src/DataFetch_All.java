@@ -52,7 +52,7 @@ public class DataFetch_All {
 				peo.setFirst_name((String)record.getValue("first_name"));
 				peo.setLast_name((String)record.getValue("last_name"));
 				peo.setAffiliation_name((String)record.getValue("affiliation_name"));
-				peo.setBithplace((String)record.getValue("birthplace"));
+				peo.setBirthplace((String)record.getValue("birthplace"));
 								
 			}
 
