@@ -34,14 +34,11 @@ public class DataF_cb_people {
     }
     
   //简单实体查询  一种方法
-    public Result<Record> select(String objectid)
+    public Result<Record> getPersonInfo(String objectid)
     {
         DSLContext getdslContext = getdslContext();
         Table<Record> table = DSL.table("cb_people");
-        SelectQuery<Record> selectQuery = getdslContext.selectQuery(table);//获取查询对象
-        Condition eq = DSL.field("object_id").eq(objectid);//查询条件
-        selectQuery.addConditions(eq);//添加查询条件
-        Result<Record> res = selectQuery.fetch();
+        Result<Record> res = getdslContext.select().from(table).where("object_id = '"+objectid+"' ").fetch();    	
         
         return res;
         /*for (Object aResult : fetch) {

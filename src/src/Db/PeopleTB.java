@@ -2,16 +2,19 @@ package src.Db;
 
 public class PeopleTB 
 {
-	private int id; 				//关联cb_degrees表
+	private Long id; 				//关联cb_degrees表
 	private String object_id;
 	private String first_name;
 	private String last_name;
 	private String bithplace;
 	private String affiliation_name;
-	public int getId() {
+
+	
+	
+	public Long getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getObject_id() {

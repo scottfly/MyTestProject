@@ -52,6 +52,36 @@ public class DataF_cb_objects {
         }*/
     }
     
+    //
+    public Result<Record> getCompanyInfo(String objectid)
+    {
+    	
+        DSLContext getdslContext = getdslContext();
+        Table<Record> table = DSL.table("cb_objects");//表名
+        //Table<Record> table_refer = DSL.table("cb_relationships");
+        
+        Result<Record> res = getdslContext.select().from(table).join("cb_relationships").on("peron_object_id = '"+objectid+"' ")
+        					.orderBy(DSL.field("entity_id"))
+        					.fetch();    		
+    	
+    	return res;
+    	
+    }
     
+    //select base  entity id
+    //
+    public Result<Record> getRefersInfo(Long entity_id)
+    {
+    	
+        DSLContext getdslContext = getdslContext();
+        Table<Record> table = DSL.table("cb_objects");//表名
+        
+        Result<Record> res = getdslContext.select().from(table).where("id = '"+entity_id.toString()+"'")
+        					.orderBy(DSL.field("entity_id"))
+        					.fetch();    		
+    	
+    	return res;
+    	
+    }
     
 }

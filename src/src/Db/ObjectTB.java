@@ -38,6 +38,24 @@ public class ObjectTB {
 	public String getName() {
 		return name;
 	}
+	public Long getEntity_id() {
+		return entity_id;
+	}
+	public void setEntity_id(Long entity_id) {
+		this.entity_id = entity_id;
+	}
+	public String getNormalized_name() {
+		return normalized_name;
+	}
+	public void setNormalized_name(String normalized_name) {
+		this.normalized_name = normalized_name;
+	}
+	public String getPermalink() {
+		return permalink;
+	}
+	public void setPermalink(String permalink) {
+		this.permalink = permalink;
+	}
 	public void setName(String name) {
 		this.name = name;
 	}
