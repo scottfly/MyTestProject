@@ -47,7 +47,11 @@ public class DataFetch_All {
 			for(Object aResult : res_peoples){
 				Record record = (Record) aResult;
 								
-				peo.setId((Long) record.getValue("id"));
+				if(record.getValue("id") != null)
+				{
+					peo.setId((Long)record.getValue("id"));
+				}
+				
 				peo.setObject_id((String)record.getValue("object_id"));
 				peo.setFirst_name((String)record.getValue("first_name"));
 				peo.setLast_name((String)record.getValue("last_name"));
@@ -112,7 +116,9 @@ public class DataFetch_All {
 		@Override
 		public Object get(DataFetchingEnvironment environment) {
 			// TODO Auto-generated method stub
-			String object_id = environment.getArgument("object_id");
+			//String object_id = environment.getArgument("object_id");
+			Object obj = environment.getSource();
+			String object_id = ((PeopleTB) obj).getObject_id();
 			
 			List<ObjectTB> companyInfos = new ArrayList<ObjectTB>();
 			DataF_cb_objects company_object = new DataF_cb_objects();
@@ -123,13 +129,17 @@ public class DataFetch_All {
 				return null;
 			}
 			
-			res_companys = company_object.getCompanyInfo(object_id);
+			res_companys = company_object.getCompanyToPerson(object_id);
 			
 			for(Object aResult : res_companys){
 				Record record = (Record) aResult;
 				ObjectTB objectinfo = new ObjectTB();
 				
-				objectinfo.setEntity_id((Long)record.getValue("entity_id"));
+				if(record.getValue("entity_id") != null)
+				{
+					objectinfo.setEntity_id((Long)record.getValue("entity_id"));
+				}
+				
 				objectinfo.setName((String)record.getValue("name"));
 				objectinfo.setNormalized_name((String)record.getValue("normalized_name"));
 				objectinfo.setPermalink((String)record.getValue("permalink"));
@@ -139,11 +149,32 @@ public class DataFetch_All {
 				objectinfo.setLogo_url((String)record.getValue("logo_url"));
 				objectinfo.setOverview((String)record.getValue("overview"));
 				objectinfo.setCity((String)record.getValue("city"));
-				objectinfo.setFunding_rounds((int)record.getValue("funding_rounds"));
-				objectinfo.setRelationships((int)record.getValue("relationships"));
-				objectinfo.setInvestment_rounds((int)record.getValue("investment_rounds"));
-				objectinfo.setInvested_companies((int)record.getValue("invested_companies"));
-				objectinfo.setMilestones((int)record.getValue("milestones"));
+				
+				if(record.getValue("funding_rounds") != null)
+				{
+					objectinfo.setFunding_rounds((int)record.getValue("funding_rounds"));
+				}
+				
+				if(record.getValue("relationships") != null)
+				{
+					objectinfo.setRelationships((int)record.getValue("relationships"));
+				}
+						
+				if(record.getValue("investment_rounds") != null)
+				{
+					objectinfo.setInvestment_rounds((int)record.getValue("investment_rounds"));
+				}
+		
+				if(record.getValue("invested_companies") != null)
+				{
+					objectinfo.setInvested_companies((int)record.getValue("invested_companies"));
+				}
+				
+				if(record.getValue("milestones") != null)
+				{
+					objectinfo.setMilestones((int)record.getValue("milestones"));
+				}
+				
 				
 				companyInfos.add(objectinfo);				
 			}									

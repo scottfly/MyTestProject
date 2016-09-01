@@ -191,6 +191,8 @@ public class ProjectSchema {
 			 .field(newFieldDefinition().name("name").type(new GraphQLNonNull(GraphQLString)).build())
 			 .field(newFieldDefinition().name("normalized_name").type(GraphQLString).build())
 			 .field(newFieldDefinition().name("parent_id").type(GraphQLString).build())
+			 .field(newFieldDefinition().name("foundedAt").type(GraphQLString).build())
+			 .field(newFieldDefinition().name("fundingRounds").type(GraphQLInt).build())
 			 .field(newFieldDefinition().name("refer_companys").type(new GraphQLList(new GraphQLTypeReference("ObjectEntity"))).build())
 			 .field(newFieldDefinition().name("refer_persons").type(new GraphQLList(new GraphQLTypeReference("ObjectEntity"))).build())
 			 .field(newFieldDefinition().name("refer_products").type(new GraphQLList(new GraphQLTypeReference("ObjectEntity"))).build())
@@ -200,7 +202,7 @@ public class ProjectSchema {
 				@Override
 				public GraphQLObjectType getType(Object object) {
 					// TODO Auto-generated method stub
-					if (object instanceof Company) {
+					if (object instanceof ObjectTB) {
                         return company;
                     }
 					if (object instanceof Person) {
@@ -242,12 +244,11 @@ public class ProjectSchema {
 			.field(newFieldDefinition().name("last_name").type(GraphQLString).build())
 			.field(newFieldDefinition().name("birthplace").type(GraphQLString).build())
 			.field(newFieldDefinition().name("affiliation_name").type(GraphQLString).build())
-			//.field(newFieldDefinition().name("refer_persons").type(new GraphQLList(objectEntity)).build())
-			//.field(newFieldDefinition()
-			//		.name("refer_company")
-			//		.type(new GraphQLList(objectEntity))
-			//		.dataFetcher(DataFetch_All.companysFetcher)
-			//		.build())
+			.field(newFieldDefinition()
+					.name("refer_company")
+					.type(new GraphQLList(objectEntity))
+					.dataFetcher(DataFetch_All.companysFetcher)
+					.build())
 			//.field(newFieldDefinition().name("degree_info").type(degree).build())			
 			.build();
 	

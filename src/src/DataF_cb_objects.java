@@ -33,7 +33,7 @@ public class DataF_cb_objects {
     }
     
   //原生态的sql查询
-    public Result<Record> getVal(String type)
+    public Result<Record> getEntityType(String type)
     {
         DSLContext getdslContext = getdslContext();
         Table<Record> table = DSL.table("cb_objects");//表名
@@ -58,25 +58,40 @@ public class DataF_cb_objects {
     	
         DSLContext getdslContext = getdslContext();
         Table<Record> table = DSL.table("cb_objects");//表名
-        //Table<Record> table_refer = DSL.table("cb_relationships");
         
-        Result<Record> res = getdslContext.select().from(table).join("cb_relationships").on("peron_object_id = '"+objectid+"' ")
-        					.orderBy(DSL.field("entity_id"))
-        					.fetch();    		
+        Result<Record> res = getdslContext.select().from(table).where("id = '"+ objectid +"'")
+        											.orderBy(DSL.field("entity_id"))
+        											.fetch();    		
     	
     	return res;
     	
     }
     
+    
+    //get company refer to person
+    public Result<Record> getCompanyToPerson(String objectid)
+    {
+    	
+        DSLContext getdslContext = getdslContext();
+        Table<Record> table = DSL.table("cb_objects");//表名
+        
+        Result<Record> res = getdslContext.select().from(table).join("cb_relationships")
+        											.on("cb_objects.id = cb_relationships.relationship_object_id ")
+        											.where(" cb_relationships.person_object_id = '"+ objectid +"'")
+        											.orderBy(DSL.field("entity_id"))
+        											.fetch();    		
+    	
+    	return res;
+    	
+    }
     //select base  entity id
-    //
     public Result<Record> getRefersInfo(Long entity_id)
     {
     	
         DSLContext getdslContext = getdslContext();
         Table<Record> table = DSL.table("cb_objects");//表名
         
-        Result<Record> res = getdslContext.select().from(table).where("id = '"+entity_id.toString()+"'")
+        Result<Record> res = getdslContext.select().from(table).where("entity_id = '"+entity_id+"'")
         					.orderBy(DSL.field("entity_id"))
         					.fetch();    		
     	
