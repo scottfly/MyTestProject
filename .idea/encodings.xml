@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/src/src/DB_ConnectPool.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/src/DataF_cb_objects.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/src/DataF_cb_people.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/src/DataF_cb_relationship.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/src/MyTest.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/src/ProjectSchema.java" charset="GBK" />
+  </component>
+</project>

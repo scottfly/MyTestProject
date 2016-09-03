@@ -36,7 +36,7 @@ public class MyTest {
 		System.out.println(result1);
 		*/
 		//test two refer table
-		String 	query2 = "{people_info(object_id: \"p:7\") {id,first_name,last_name,affiliation_name,refer_company{id,name,normalized_name,foundedAt,fundingRounds}}}";
+		String 	query2 = "{people_info(object_id: \"p:7\") {id,first_name,last_name,affiliation_name,refer_company{id,name,normalized_name,founded_at,funding_rounds}}}";
 		
 		Map<String, Object> result2 = (Map<String, Object>) new GraphQL(schema).execute(query2).getData();
 		System.out.println(result2);

@@ -12,7 +12,7 @@
 	<classpathentry kind="lib" path="D:/Java_jar/jar/log4j-1.2.17.jar"/>
 	<classpathentry kind="lib" path="D:/Java_jar/jar/mysql-connector-java-5.1.27.jar"/>
 	<classpathentry kind="lib" path="D:/Java_jar/jar/jooq-3.8.4.jar"/>
-	<classpathentry kind="lib" path="D:/Java_jar/JAVA_JAR/slf4j-api-1.6.6.jar"/>
 	<classpathentry kind="lib" path="D:/Java_jar/slf4j-log4j12-1.7.21.jar"/>
+	<classpathentry kind="lib" path="D:/Java_jar/slf4j-1.7.21/slf4j-1.7.21/slf4j-api-1.7.21.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -132,6 +132,7 @@ public class DataFetch_All {
 			res_companys = company_object.getCompanyToPerson(object_id);
 			
 			for(Object aResult : res_companys){
+
 				Record record = (Record) aResult;
 				ObjectTB objectinfo = new ObjectTB();
 				
@@ -139,11 +140,11 @@ public class DataFetch_All {
 				{
 					objectinfo.setEntity_id((Long)record.getValue("entity_id"));
 				}
-				
+				objectinfo.setId((String)record.getValue("id"));
 				objectinfo.setName((String)record.getValue("name"));
 				objectinfo.setNormalized_name((String)record.getValue("normalized_name"));
 				objectinfo.setPermalink((String)record.getValue("permalink"));
-				objectinfo.setFounded_at((Date)record.getValue("founded_at"));
+				objectinfo.setFounded_at(((Date)record.getValue("founded_at")).toString());
 				objectinfo.setDomain((String)record.getValue("domain"));
 				objectinfo.setHomepage_url((String)record.getValue("homepage_url"));
 				objectinfo.setLogo_url((String)record.getValue("logo_url"));
@@ -177,7 +178,7 @@ public class DataFetch_All {
 				
 				
 				companyInfos.add(objectinfo);				
-			}									
+			}	
 			return companyInfos;
 		}
 	};

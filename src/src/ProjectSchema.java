@@ -183,6 +183,21 @@ public class ProjectSchema {
 	
 	
 	/********************************/
+	//test
+	 public static GraphQLObjectType Objecttest = newObject()
+			 .name("Objecttest")
+			 .description("a company? a people? products or other")
+			 .field(newFieldDefinition().name("id").type(new GraphQLNonNull(GraphQLString)).build())
+			 .field(newFieldDefinition().name("name").type(new GraphQLNonNull(GraphQLString)).build())
+			 .field(newFieldDefinition().name("normalized_name").type(GraphQLString).build())
+			 .field(newFieldDefinition().name("parent_id").type(GraphQLString).build())
+			 .field(newFieldDefinition().name("founded_at").type(GraphQLString).build())
+			 .field(newFieldDefinition().name("funding_rounds").type(GraphQLInt).build())
+			 .build();
+	
+	
+	
+	
 	//定义一个Entity
 	 public static GraphQLInterfaceType objectEntity = newInterface()
 			 .name("ObjectEntity")
@@ -191,8 +206,8 @@ public class ProjectSchema {
 			 .field(newFieldDefinition().name("name").type(new GraphQLNonNull(GraphQLString)).build())
 			 .field(newFieldDefinition().name("normalized_name").type(GraphQLString).build())
 			 .field(newFieldDefinition().name("parent_id").type(GraphQLString).build())
-			 .field(newFieldDefinition().name("foundedAt").type(GraphQLString).build())
-			 .field(newFieldDefinition().name("fundingRounds").type(GraphQLInt).build())
+			 .field(newFieldDefinition().name("founded_at").type(GraphQLString).build())
+			 .field(newFieldDefinition().name("funding_rounds").type(GraphQLInt).build())
 			 .field(newFieldDefinition().name("refer_companys").type(new GraphQLList(new GraphQLTypeReference("ObjectEntity"))).build())
 			 .field(newFieldDefinition().name("refer_persons").type(new GraphQLList(new GraphQLTypeReference("ObjectEntity"))).build())
 			 .field(newFieldDefinition().name("refer_products").type(new GraphQLList(new GraphQLTypeReference("ObjectEntity"))).build())
@@ -246,7 +261,7 @@ public class ProjectSchema {
 			.field(newFieldDefinition().name("affiliation_name").type(GraphQLString).build())
 			.field(newFieldDefinition()
 					.name("refer_company")
-					.type(new GraphQLList(objectEntity))
+					.type(new GraphQLList(Objecttest))
 					.dataFetcher(DataFetch_All.companysFetcher)
 					.build())
 			//.field(newFieldDefinition().name("degree_info").type(degree).build())			
@@ -262,9 +277,9 @@ public class ProjectSchema {
 			.field(newFieldDefinition().name("domain").type(GraphQLString).build())
 			.field(newFieldDefinition().name("homepageurl").type(GraphQLString).build())
 			.field(newFieldDefinition().name("overview").type(GraphQLString).build())
-			.field(newFieldDefinition().name("foundedAt").type(GraphQLString).build())
+			.field(newFieldDefinition().name("founded_at").type(GraphQLString).build())
 			.field(newFieldDefinition().name("allProducts").type(new GraphQLList(ProductsType)).build())
-			.field(newFieldDefinition().name("fundingRounds").type(GraphQLInt).build())
+			.field(newFieldDefinition().name("funding_rounds").type(GraphQLInt).build())
 			.field(newFieldDefinition().name("fundingRounds_info").type(new GraphQLList(funding_Rounds)).build())
 			.field(newFieldDefinition().name("refer_companys").type(new GraphQLList(objectEntity)).build())
 			.field(newFieldDefinition().name("refer_person").type(new GraphQLList(objectEntity)).build())

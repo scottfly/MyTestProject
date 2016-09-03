@@ -10,7 +10,7 @@ public class ObjectTB {
 	private String normalized_name;
 	private String permalink;
 	private String name;
-	private Date founded_at;
+	private String founded_at;
 	private String domain;
 	private String homepage_url;	
 	private String logo_url;
@@ -59,10 +59,11 @@ public class ObjectTB {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Date getFounded_at() {
+
+	public String getFounded_at() {
 		return founded_at;
 	}
-	public void setFounded_at(Date founded_at) {
+	public void setFounded_at(String founded_at) {
 		this.founded_at = founded_at;
 	}
 	public String getDomain() {
