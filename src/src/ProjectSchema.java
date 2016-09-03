@@ -205,13 +205,13 @@ public class ProjectSchema {
 					if (object instanceof ObjectTB) {
                         return company;
                     }
-					if (object instanceof Person) {
+					if (object instanceof PeopleTB) {
                         return person;
                     }
 					if (object instanceof Products) {
                         return ProductsType;
                     }
-					if (object instanceof FinancialOrg) {
+					if (object instanceof Funds) {
                         return FinancialOrg;
                     }
 					return null;
