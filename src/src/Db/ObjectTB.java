@@ -1,5 +1,6 @@
 package src.Db;
 import java.sql.Date;
+import java.math.BigDecimal;
 
 public class ObjectTB {
 	
@@ -8,14 +9,25 @@ public class ObjectTB {
 	private Long entity_id;
 	private String parent_id;			//parent_id 关联company？
 	private String normalized_name;
+	private String category_code;
 	private String permalink;
 	private String name;
 	private String founded_at;
+	private String closed_at;
 	private String domain;
 	private String homepage_url;	
 	private String logo_url;
+	private String description;
 	private String overview;
 	private String city;
+	private String region;
+	private String first_investment_at;
+	private String last_investment_at;
+	private String first_funding_at;
+	private String last_funding_at;
+	private BigDecimal funding_total_usd;
+	private String first_milestone_at;
+	private String last_milestone_at;
 	private int funding_rounds;			//关联 cb_funding_rounds表   以及 cd_funds表
 	private int relationships;			//关联cb_relationships表
 	private int investment_rounds;
@@ -23,6 +35,73 @@ public class ObjectTB {
 	private int milestones;				//数量说明与cb_milestones表关联
 	
 	
+	public String getCategory_code() {
+		return category_code;
+	}
+	public void setCategory_code(String category_code) {
+		this.category_code = category_code;
+	}
+	public String getClosed_at() {
+		return closed_at;
+	}
+	public void setClosed_at(String closed_at) {
+		this.closed_at = closed_at;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public String getRegion() {
+		return region;
+	}
+	public void setRegion(String region) {
+		this.region = region;
+	}
+	public String getFirst_investment_at() {
+		return first_investment_at;
+	}
+	public void setFirst_investment_at(String first_investment_at) {
+		this.first_investment_at = first_investment_at;
+	}
+	public String getLast_investment_at() {
+		return last_investment_at;
+	}
+	public void setLast_investment_at(String last_investment_at) {
+		this.last_investment_at = last_investment_at;
+	}
+	public String getFirst_funding_at() {
+		return first_funding_at;
+	}
+	public void setFirst_funding_at(String first_funding_at) {
+		this.first_funding_at = first_funding_at;
+	}
+	public String getLast_funding_at() {
+		return last_funding_at;
+	}
+	public void setLast_funding_at(String last_funding_at) {
+		this.last_funding_at = last_funding_at;
+	}
+	public BigDecimal getFunding_total_usd() {
+		return funding_total_usd;
+	}
+	public void setFunding_total_usd(BigDecimal funding_total_usd) {
+		this.funding_total_usd = funding_total_usd;
+	}
+	public String getFirst_milestone_at() {
+		return first_milestone_at;
+	}
+	public void setFirst_milestone_at(String first_milestone_at) {
+		this.first_milestone_at = first_milestone_at;
+	}
+	public String getLast_milestone_at() {
+		return last_milestone_at;
+	}
+	public void setLast_milestone_at(String last_milestone_at) {
+		this.last_milestone_at = last_milestone_at;
+	}
+		
 	public String getId() {
 		return id;
 	}

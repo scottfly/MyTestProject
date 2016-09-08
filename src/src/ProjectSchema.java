@@ -32,6 +32,67 @@ public class ProjectSchema {
 	
 	
 	/********************************/
+	
+	//定义一个Entity
+		 public static GraphQLInterfaceType objectEntity = newInterface()
+				 .name("ObjectEntity")
+				 .description("a company? a people? products or other")
+				 .field(newFieldDefinition().name("id").type(new GraphQLNonNull(GraphQLString)).build())
+				 .field(newFieldDefinition().name("entity_type").type(new GraphQLNonNull(GraphQLString)).build())
+				 .field(newFieldDefinition().name("parent_id").type(GraphQLString).build())
+				 .field(newFieldDefinition().name("name").type(new GraphQLNonNull(GraphQLString)).build())
+				 .field(newFieldDefinition().name("normalized_name").type(GraphQLString).build())
+				 .field(newFieldDefinition().name("category_code").type(GraphQLString).build())
+				 .field(newFieldDefinition().name("founded_at").type(GraphQLString).build())
+				 .field(newFieldDefinition().name("closed_at").type(GraphQLString).build())
+				 .field(newFieldDefinition().name("domain").type(GraphQLString).build())
+				 .field(newFieldDefinition().name("homepage_url").type(GraphQLString).build())
+				 .field(newFieldDefinition().name("logo_url").type(GraphQLString).build())
+				 .field(newFieldDefinition().name("description").type(GraphQLString).build())
+				 .field(newFieldDefinition().name("region").type(GraphQLString).build())
+				 .field(newFieldDefinition().name("overview").type(GraphQLString).build())
+				 .field(newFieldDefinition().name("first_investment_at").type(GraphQLString).build())
+				 .field(newFieldDefinition().name("last_investment_at").type(GraphQLString).build())
+				 .field(newFieldDefinition().name("invested_companies").type(GraphQLInt).build())
+				 .field(newFieldDefinition().name("investment_rounds").type(GraphQLInt).build())
+				 .field(newFieldDefinition().name("first_funding_at").type(GraphQLString).build())
+				 .field(newFieldDefinition().name("last_funding_at").type(GraphQLString).build())
+				 .field(newFieldDefinition().name("funding_total_usd").type(GraphQLBigInteger).build())
+				 .field(newFieldDefinition().name("funding_rounds").type(GraphQLInt).build())
+				 .field(newFieldDefinition().name("milestones").type(GraphQLInt).build())
+				 .field(newFieldDefinition().name("relationships").type(GraphQLInt).build())
+				 .field(newFieldDefinition()
+						 .name("refer_info")
+						 .type(new GraphQLList(new GraphQLTypeReference("ObjectEntity")))
+						 .build())
+				 .typeResolver(new TypeResolver(){
+					 
+					@Override
+					public GraphQLObjectType getType(Object object) {
+						// TODO Auto-generated method stub
+						String entity_type = ((ObjectTB)object).getEntity_type();
+						if (entity_type.equals("Company")) {
+	                        return company;
+	                    }
+						if (entity_type.equals("Person")) {
+	                        return person;
+	                    }
+						if (entity_type.equals("Product")) {
+	                        return ProductsType;
+	                    }
+						if (entity_type.equals("FinancialOrg")) {
+	                        return FinancialOrg;
+	                    }
+						return null;
+					}
+					 
+				 })
+				 .build();
+	
+	
+	
+	
+	
 	//web type
 	public static GraphQLObjectType webType = newObject()
 			.name("webinfo")
@@ -196,47 +257,6 @@ public class ProjectSchema {
 			 .build();
 	
 	
-	
-	
-	//定义一个Entity
-	 public static GraphQLInterfaceType objectEntity = newInterface()
-			 .name("ObjectEntity")
-			 .description("a company? a people? products or other")
-			 .field(newFieldDefinition().name("id").type(new GraphQLNonNull(GraphQLString)).build())
-			 .field(newFieldDefinition().name("name").type(new GraphQLNonNull(GraphQLString)).build())
-			 .field(newFieldDefinition().name("normalized_name").type(GraphQLString).build())
-			 .field(newFieldDefinition().name("parent_id").type(GraphQLString).build())
-			 .field(newFieldDefinition().name("founded_at").type(GraphQLString).build())
-			 .field(newFieldDefinition().name("funding_rounds").type(GraphQLInt).build())
-			 .field(newFieldDefinition().name("refer_companys").type(new GraphQLList(new GraphQLTypeReference("ObjectEntity"))).build())
-			 .field(newFieldDefinition().name("refer_persons").type(new GraphQLList(new GraphQLTypeReference("ObjectEntity"))).build())
-			 .field(newFieldDefinition().name("refer_products").type(new GraphQLList(new GraphQLTypeReference("ObjectEntity"))).build())
-			 .field(newFieldDefinition().name("refer_financial").type(new GraphQLList(new GraphQLTypeReference("ObjectEntity"))).build())
-			 .typeResolver(new TypeResolver(){
-				 
-				@Override
-				public GraphQLObjectType getType(Object object) {
-					// TODO Auto-generated method stub
-					if (object instanceof ObjectTB) {
-                        return company;
-                    }
-					if (object instanceof PeopleTB) {
-                        return person;
-                    }
-					if (object instanceof Products) {
-                        return ProductsType;
-                    }
-					if (object instanceof Funds) {
-                        return FinancialOrg;
-                    }
-					return null;
-				}
-				 
-			 })
-			 .build();
-			 
-	
-	
 	//product list
 	public static GraphQLObjectType  ProductsType = newObject()
 			.name("Products")
@@ -261,7 +281,7 @@ public class ProjectSchema {
 			.field(newFieldDefinition().name("affiliation_name").type(GraphQLString).build())
 			.field(newFieldDefinition()
 					.name("refer_company")
-					.type(new GraphQLList(Objecttest))
+					.type(new GraphQLList(objectEntity))
 					.dataFetcher(DataFetch_All.companysFetcher)
 					.build())
 			//.field(newFieldDefinition().name("degree_info").type(degree).build())			
@@ -283,7 +303,6 @@ public class ProjectSchema {
 			.field(newFieldDefinition().name("fundingRounds_info").type(new GraphQLList(funding_Rounds)).build())
 			.field(newFieldDefinition().name("refer_companys").type(new GraphQLList(objectEntity)).build())
 			.field(newFieldDefinition().name("refer_person").type(new GraphQLList(objectEntity)).build())
-			.field(newFieldDefinition().name("relationship").type(new GraphQLList(person)).build())
 			.field(newFieldDefinition().name("officeinfo").type(new GraphQLList(offices)).build())
 			 /**
 			  *。。。other base type 
