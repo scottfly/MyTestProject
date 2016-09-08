@@ -260,11 +260,16 @@ public class ProjectSchema {
 	//product list
 	public static GraphQLObjectType  ProductsType = newObject()
 			.name("Products")
+			.withInterface(objectEntity)
 			.field(newFieldDefinition().name("id").type(new GraphQLNonNull(GraphQLString)).build())
 			.field(newFieldDefinition().name("name").type(new GraphQLList(GraphQLString)).build())
 			.field(newFieldDefinition().name("parent_id").type(GraphQLString).build())
 			.field(newFieldDefinition().name("refer_companys").type(new GraphQLList(objectEntity)).build())
-			.withInterface(objectEntity)
+			.field(newFieldDefinition()
+					.name("refer_info")
+					.type(new GraphQLList(objectEntity))
+					.dataFetcher(DataFetch_All.companysFetcher)
+					.build())
 			.build();
 			
 	
@@ -280,7 +285,7 @@ public class ProjectSchema {
 			.field(newFieldDefinition().name("birthplace").type(GraphQLString).build())
 			.field(newFieldDefinition().name("affiliation_name").type(GraphQLString).build())
 			.field(newFieldDefinition()
-					.name("refer_company")
+					.name("refer_info")
 					.type(new GraphQLList(objectEntity))
 					.dataFetcher(DataFetch_All.companysFetcher)
 					.build())
@@ -304,6 +309,11 @@ public class ProjectSchema {
 			.field(newFieldDefinition().name("refer_companys").type(new GraphQLList(objectEntity)).build())
 			.field(newFieldDefinition().name("refer_person").type(new GraphQLList(objectEntity)).build())
 			.field(newFieldDefinition().name("officeinfo").type(new GraphQLList(offices)).build())
+			.field(newFieldDefinition()
+					.name("refer_info")
+					.type(new GraphQLList(objectEntity))
+					.dataFetcher(DataFetch_All.companysFetcher)
+					.build())
 			 /**
 			  *。。。other base type 
 			  */
@@ -320,6 +330,11 @@ public class ProjectSchema {
 			.field(newFieldDefinition().name("funds_info").type(new GraphQLList(funds)).build())
 			.field(newFieldDefinition().name("refer_companys").type(new GraphQLList(objectEntity)).build())
 			.field(newFieldDefinition().name("refer_persons").type(new GraphQLList(objectEntity)).build())
+			.field(newFieldDefinition()
+					.name("refer_info")
+					.type(new GraphQLList(objectEntity))
+					.dataFetcher(DataFetch_All.companysFetcher)
+					.build())
 			 /**
 			  *。。。other base type 
 			  */
@@ -336,22 +351,6 @@ public class ProjectSchema {
 				.dataFetcher(DataFetch_All.peopleInfoFetcher)
 				.build();
 	}
-	
-	//funding_roundtype "seriesB"  to   [company of team {persons {degree}}  ]
-	/*query testqurey {
-	 * team_info($roundtype:GraphQLString ){								//cb_funding_rounds return company_object_id
-	 *    company_objectid   <list>
-	 *    companys($company_object_id: GraphQLList(roundtype:GraphQLString)){	//cb_investments return person_object_id
-	 *    	company_name
-	 *   	person_object_id
-	 *    	degree($person_object_id:GraphQLString ){									//cb_degree 
-	 *    		degree_type
-	 *    		institution 				
-	 *    		}
-	 *    	}
-	 *    }
-	 *  }
-	 * */
 
 	//
 	public GraphQLFieldDefinition Queryquestion_1()
