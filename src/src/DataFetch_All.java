@@ -140,6 +140,7 @@ public class DataFetch_All {
 				{
 					objectinfo.setEntity_id((Long)record.getValue("entity_id"));
 				}
+				objectinfo.setEntity_type((String)record.getValue("entity_type"));
 				objectinfo.setId((String)record.getValue("id"));
 				objectinfo.setName((String)record.getValue("name"));
 				objectinfo.setNormalized_name((String)record.getValue("normalized_name"));
@@ -189,9 +190,11 @@ public class DataFetch_All {
 		@Override
 		public Object get(DataFetchingEnvironment environment) {
 			// TODO Auto-generated method stub
-			String person_id = environment.getArgument("");
+			Object obj = environment.getSource();
+			String person_id = ((Degrees) obj).getObject_id();		
 			
-			List<Degrees> degreeInfo = new ArrayList<Degrees>();
+			Degrees degreeInfo = new Degrees();
+			
 			/**/
 			return degreeInfo;
 		}

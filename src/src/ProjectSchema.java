@@ -243,20 +243,7 @@ public class ProjectSchema {
 	
 	
 	
-	/********************************/
-	//test
-	 public static GraphQLObjectType Objecttest = newObject()
-			 .name("Objecttest")
-			 .description("a company? a people? products or other")
-			 .field(newFieldDefinition().name("id").type(new GraphQLNonNull(GraphQLString)).build())
-			 .field(newFieldDefinition().name("name").type(new GraphQLNonNull(GraphQLString)).build())
-			 .field(newFieldDefinition().name("normalized_name").type(GraphQLString).build())
-			 .field(newFieldDefinition().name("parent_id").type(GraphQLString).build())
-			 .field(newFieldDefinition().name("founded_at").type(GraphQLString).build())
-			 .field(newFieldDefinition().name("funding_rounds").type(GraphQLInt).build())
-			 .build();
-	
-	
+	/********************************/	
 	//product list
 	public static GraphQLObjectType  ProductsType = newObject()
 			.name("Products")
@@ -289,7 +276,11 @@ public class ProjectSchema {
 					.type(new GraphQLList(objectEntity))
 					.dataFetcher(DataFetch_All.companysFetcher)
 					.build())
-			//.field(newFieldDefinition().name("degree_info").type(degree).build())			
+			.field(newFieldDefinition()
+					.name("degree_info")
+					.type(degree)
+					.dataFetcher(DataFetch_All.degreeFetcher)
+					.build())			
 			.build();
 	
 	//cb_objects(company interface objectEntity)
@@ -303,12 +294,10 @@ public class ProjectSchema {
 			.field(newFieldDefinition().name("homepageurl").type(GraphQLString).build())
 			.field(newFieldDefinition().name("overview").type(GraphQLString).build())
 			.field(newFieldDefinition().name("founded_at").type(GraphQLString).build())
-			.field(newFieldDefinition().name("allProducts").type(new GraphQLList(ProductsType)).build())
+			//.field(newFieldDefinition().name("allProducts").type(new GraphQLList(ProductsType)).build())
 			.field(newFieldDefinition().name("funding_rounds").type(GraphQLInt).build())
-			.field(newFieldDefinition().name("fundingRounds_info").type(new GraphQLList(funding_Rounds)).build())
-			.field(newFieldDefinition().name("refer_companys").type(new GraphQLList(objectEntity)).build())
-			.field(newFieldDefinition().name("refer_person").type(new GraphQLList(objectEntity)).build())
-			.field(newFieldDefinition().name("officeinfo").type(new GraphQLList(offices)).build())
+			//.field(newFieldDefinition().name("fundingRounds_info").type(new GraphQLList(funding_Rounds)).build())
+			//.field(newFieldDefinition().name("officeinfo").type(new GraphQLList(offices)).build())
 			.field(newFieldDefinition()
 					.name("refer_info")
 					.type(new GraphQLList(objectEntity))
