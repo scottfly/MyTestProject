@@ -335,7 +335,7 @@ public class ProjectSchema {
 	{
 		return GraphQLFieldDefinition.newFieldDefinition()
 				.name("people_info")
-				.type(person)
+				.type(person)            // use input object type instead of  normal object type maybe circle reference!!
 				.argument(newArgument().name("object_id").type(GraphQLString).build())
 				.argument(newArgument().name("name").type(GraphQLString).build())
 				.dataFetcher(DataFetch_All.peopleInfoFetcher)

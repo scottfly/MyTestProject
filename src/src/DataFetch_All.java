@@ -192,7 +192,7 @@ public class DataFetch_All {
 			// TODO Auto-generated method stub
 			Object obj = environment.getSource();
 			String person_id = ((PeopleTB) obj).getObject_id();		
-						
+					
 			if(person_id.isEmpty())
 			{
 				return null;
