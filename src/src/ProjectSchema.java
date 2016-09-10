@@ -337,6 +337,7 @@ public class ProjectSchema {
 				.name("people_info")
 				.type(person)
 				.argument(newArgument().name("object_id").type(GraphQLString).build())
+				.argument(newArgument().name("name").type(GraphQLString).build())
 				.dataFetcher(DataFetch_All.peopleInfoFetcher)
 				.build();
 	}

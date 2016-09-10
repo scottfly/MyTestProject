@@ -191,11 +191,31 @@ public class DataFetch_All {
 		public Object get(DataFetchingEnvironment environment) {
 			// TODO Auto-generated method stub
 			Object obj = environment.getSource();
-			String person_id = ((Degrees) obj).getObject_id();		
+			String person_id = ((PeopleTB) obj).getObject_id();		
+						
+			if(person_id.isEmpty())
+			{
+				return null;
+			}
 			
 			Degrees degreeInfo = new Degrees();
+			Data_cb_degrees degree_object = new Data_cb_degrees();
+			Result<Record> res_degree;
 			
-			/**/
+			res_degree = degree_object.getDegreesInfo(person_id);
+			
+			for(Object aResult : res_degree){
+				
+				Record record = (Record) aResult;	
+				
+				degreeInfo.setId((Long)record.getValue("id"));
+				degreeInfo.setObject_id((String)record.getValue("object_id"));
+				degreeInfo.setDegree_type((String)record.getValue("degree_type"));
+				degreeInfo.setSubject((String)record.getValue("subject"));
+				degreeInfo.setInstitution((String)record.getValue("institution"));
+				degreeInfo.setGraduated_at(((Date)record.getValue("graduated_at")).toString());							
+			}
+			
 			return degreeInfo;
 		}
 

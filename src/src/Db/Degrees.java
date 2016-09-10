@@ -9,7 +9,7 @@ public class Degrees {
 	private String degree_type;
 	private String subject;
 	private String institution;
-	private Date graduated_at;
+	private String graduated_at;
 	public Long getId() {
 		return id;
 	}
@@ -40,10 +40,10 @@ public class Degrees {
 	public void setInstitution(String institution) {
 		this.institution = institution;
 	}
-	public Date getGraduated_at() {
+	public String getGraduated_at() {
 		return graduated_at;
 	}
-	public void setGraduated_at(Date graduated_at) {
+	public void setGraduated_at(String graduated_at) {
 		this.graduated_at = graduated_at;
 	}
 	
